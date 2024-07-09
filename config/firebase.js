@@ -4,11 +4,11 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: "grox-67021",
-  storageBucket: "grox-67021.appspot.com",
-  messagingSenderId: "228724615685",
-  appId: "1:228724615685:web:c4ebea6a576b9b30ae8a6c",
-  measurementId: "G-0P2C352ECS",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECTID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APPID,
+  measurementId: import.meta.env.VITE_FIREBASE_SERVERID,
 };
 
 const app = initializeApp(firebaseConfig);
