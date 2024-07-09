@@ -1,0 +1,16 @@
+$primary-color-1: #222831;
+$primary-color-2: #393E46;
+$primary-color-3: #00ADB5;
+$primary-color-4: #00FFF5;
+
+
+body {
+    background-color: $primary-color-1;
+    color:white;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto";
+}

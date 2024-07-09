@@ -1,0 +1,47 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90vh;
+}
+.login-main {
+    margin-top: 5rem;
+  form {
+    border-radius: 5px;
+    padding: 2rem 1rem;
+    background-color: white;
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color:black;;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+}
+.signup {
+    font-size: 1.5rem;
+}
+.alread-acc {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.sign-in-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: white;
+    border: 1px solid gray;
+    gap: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    img {
+        height: 30px;
+        width: 30px;
+    }
+    p {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+}
