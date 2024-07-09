@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../../config/firebase.js";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
+import DialogContainer from "../Dialog/DialogContainer.jsx";
 
 const Header = () => {
   const location = useLocation();
@@ -12,6 +13,12 @@ const Header = () => {
     displayName: "",
     photoURL: "",
   });
+  const [dialogStatus, setDialogStatus] = useState(false);
+
+  const handleDialogStatus = () => {
+    setDialogStatus(false);
+  };
+
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -56,6 +63,12 @@ const Header = () => {
             ) : (
               <span className="material-symbols-outlined">account_circle</span>
             )}
+            <span
+              className="material-symbols-outlined"
+              onClick={() => setDialogStatus(true)}
+            >
+              add
+            </span>
             <span className="material-symbols-outlined">shopping_cart</span>
             <span className="material-symbols-outlined" onClick={handleSignOut}>
               logout
@@ -63,6 +76,7 @@ const Header = () => {
           </div>
         )}
       </div>
+      <DialogContainer open={dialogStatus} handleClose={handleDialogStatus} />
       <div className="header-temp"></div>
     </div>
   );
