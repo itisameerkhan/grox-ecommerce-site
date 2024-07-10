@@ -4,6 +4,7 @@ import { auth } from "../../../config/firebase.js";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import DialogContainer from "../Dialog/DialogContainer.jsx";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const location = useLocation();
@@ -46,11 +47,17 @@ const Header = () => {
       unsubscribe();
     };
   }, []);
-  
+
   return (
     <div className="header">
       <div className="header-main">
-        <p className="header-logo">GROX</p>
+        {location.pathname !== "/" ? (
+          <Link to={"/home"}>
+            <p className="header-logo">GROX</p>
+          </Link>
+        ) : (
+          <p className="header-logo">GROX</p>
+        )}
         {location.pathname !== "/" && (
           <div className="header-search">
             <span className="material-symbols-outlined">search</span>
