@@ -46,6 +46,7 @@ const Header = () => {
       unsubscribe();
     };
   }, []);
+  
   return (
     <div className="header">
       <div className="header-main">
