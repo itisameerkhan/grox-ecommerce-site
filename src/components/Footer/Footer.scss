@@ -1,0 +1,25 @@
+$primary-color-1: #222831;
+$primary-color-2: #393E46;
+$primary-color-3: #00ADB5;
+$primary-color-4: #00FFF5;
+
+.footer-main {
+    display: flex;
+    margin: 4rem 0 0 0;
+    padding: 2rem 8rem;
+    justify-content: space-around;
+    background-color: $primary-color-2;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        p {
+            &:nth-child(1) {
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+        }
+    }
+}
