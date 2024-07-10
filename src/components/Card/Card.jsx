@@ -3,7 +3,6 @@ import "./Card.scss";
 import { Button } from "@mui/material";
 
 const Card = (props) => {
-  console.log(props);
   const { itemName, photoURL, description, price, id } = props.props;
   return (
     <Link to={`/product/${id}`}>
