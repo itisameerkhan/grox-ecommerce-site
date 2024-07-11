@@ -5,11 +5,14 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import DialogContainer from "../Dialog/DialogContainer.jsx";
 import { Link } from "react-router-dom";
+import { addUser, removeUser } from "../../context/userSlice.js";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const location = useLocation();
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [userData, setUserData] = useState({
     displayName: "",
     photoURL: "",
@@ -23,6 +26,8 @@ const Header = () => {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
+      dispatch(removeUser());
+      console.log("remove user");
       navigate("/");
     } catch (e) {
       console.log(e);
@@ -37,6 +42,8 @@ const Header = () => {
           displayName: user.displayName,
           photoURL: user.photoURL,
         });
+        console.log("onauth call");
+        dispatch(addUser(user));
         navigate("/home");
       } else {
         navigate("/");
@@ -77,7 +84,9 @@ const Header = () => {
             >
               add
             </span>
-            <span className="material-symbols-outlined">shopping_cart</span>
+            <Link to={"/cart"}>
+              <span className="material-symbols-outlined">shopping_cart</span>
+            </Link>
             <span className="material-symbols-outlined" onClick={handleSignOut}>
               logout
             </span>

@@ -1,0 +1,31 @@
+$primary-color-1: #222831;
+$primary-color-2: #393e46;
+$primary-color-3: #00adb5;
+$primary-color-4: #00fff5;
+
+.cart-element {
+    img {
+        height: 100px;
+        width: 100px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 10px;
+        border: 2px solid black;
+    }
+    background-color: $primary-color-2;
+    padding: .5rem 1rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+        &:nth-child(2) {
+            font-size:1.2rem;
+        }
+        &:nth-child(3) {
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+    }
+}

@@ -32,11 +32,11 @@ const Product = () => {
       const docSnap = await getDoc(docReference);
       if (docSnap.exists()) {
         updateDoc(docReference, {
-          cartItems: arrayUnion(getParams.id),
+          cartItems: arrayUnion(item),
         });
       } else {
         await setDoc(docReference, {
-          cartItems: arrayUnion(getParams.id),
+          cartItems: arrayUnion(item),
         });
       }
       setIsClicked(true);
