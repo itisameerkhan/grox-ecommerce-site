@@ -1,15 +1,18 @@
 import "./Product.scss";
 import { useParams } from "react-router-dom";
-import { db } from "../../../config/firebase.js";
-import { getDoc, doc } from "firebase/firestore";
+import { db, auth } from "../../../config/firebase.js";
+import { getDoc, doc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import { Button } from "@mui/material";
 import Footer from "../../components/Footer/Footer.jsx";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Product = () => {
   const getParams = useParams();
   const [item, setItem] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+  const [isClicked, setIsClicked] = useState(false);
 
   const getData = async () => {
     try {
@@ -20,8 +23,39 @@ const Product = () => {
       console.log(e);
     }
   };
+
+  const handleAddToCart = async () => {
+    if (isClicked) return;
+    try {
+      const docReference = doc(db, "addToCart", userInfo.uid);
+      console.log(docReference);
+      const docSnap = await getDoc(docReference);
+      if (docSnap.exists()) {
+        updateDoc(docReference, {
+          cartItems: arrayUnion(getParams.id),
+        });
+      } else {
+        await setDoc(docReference, {
+          cartItems: arrayUnion(getParams.id),
+        });
+      }
+      setIsClicked(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     getData();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserInfo(user);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   if (!item) return <Spinner />;
@@ -40,11 +74,16 @@ const Product = () => {
             <p>₹ {item.price}</p>
 
             <div className="btn-container">
-              <Button variant="contained">
+              <Button
+                variant="contained"
+                onClick={handleAddToCart}
+                color={isClicked ? "success" : "primary"}
+                disabled={isClicked}
+              >
                 <span className="material-symbols-outlined span-icon">
                   shopping_bag
                 </span>
-                ADD TO CART
+                {isClicked ? "ADDED" : " ADD TO CART"}
               </Button>
               <Button variant="contained">
                 <span class="material-symbols-outlined span-icon">
